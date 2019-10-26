@@ -1,21 +1,57 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
+import { Grid, Paper, Typography, List, ListItem, ListItemText } from '@material-ui/core'
 
-import RightPanel from './RightPanel'
-import LeftPanel from './LeftPanel'
+const styles = {
+  Paper: {
+    padding: 20,
+    margin: '10px 0',
+    height: '70vh',
+    overflow: 'auto',
+  }
+}
 
-export default () => {
+export default ({ exercisesDB }) => {
   return (
     <>
       <Grid container>
         <Grid sm>
-          
-          <RightPanel />
+
+          <Paper style={styles.Paper}>
+            {exercisesDB.map(([muscles, exercises]) => (
+              <>
+                <Typography
+                  variant='headline'
+                  style={{ textTransform: 'capitalize' }}
+                >
+                  {muscles}
+                </Typography>
+                <List component="nav" aria-label="secondary mailbox folders">
+                  
+                    {exercises.map(item => (
+                      <ListItem>
+                        <ListItemText primary={item.title} />
+                      </ListItem>
+                    ))}
+                </List>
+              </>
+            ))}
+          </Paper>
 
         </Grid>
         <Grid sm>
-          
-          <LeftPanel />
+
+          <Paper style={styles.Paper}>
+          <Typography
+            variant="h5"
+          >
+            Welcome!
+          </Typography>
+          <Typography
+            variant="subtitle1"
+          >
+            Please select an example from the list
+          </Typography>
+          </Paper>
 
         </Grid>
       </Grid>
