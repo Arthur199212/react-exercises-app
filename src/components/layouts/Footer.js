@@ -1,12 +1,13 @@
 import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
 
-export default ({ muscles }) => {
-  const [value, setValue] = React.useState(0);
+export default ({ muscles, category, onSelect }) => {
+  const index = category
+  ? muscles.findIndex(group => group === category) + 1
+  : 0
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const onIndexSelect = (e, index) =>
+    onSelect(index === 0 ? '' : muscles[index - 1])
 
   return (
     <Paper square>
@@ -15,8 +16,8 @@ export default ({ muscles }) => {
         textColor="primary"
         aria-label="disabled tabs example"
         centered
-        value={value}
-        onChange={handleChange}
+        value={index}
+        onChange={onIndexSelect}
       >
         <Tab key='all' label='All' />
         {muscles.map(item => (

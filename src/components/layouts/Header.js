@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button, Typography, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+
+import DialogCreateWindow from '../exercises/dialogs/Create'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default ({ muscles, onExerciseCreate }) => {
   const classes = useStyles();
 
   return (
@@ -28,7 +30,11 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Exercises Database
           </Typography>
-          <Button color="inherit">Login</Button>
+
+          <DialogCreateWindow
+            muscles={muscles}
+            onCreate={onExerciseCreate}
+          />
         </Toolbar>
       </AppBar>
     </div>

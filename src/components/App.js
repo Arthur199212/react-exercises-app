@@ -4,7 +4,9 @@ import { muscles, exercises } from '../store'
 import { Header, Footer } from './layouts'
 import Exercises from './exercises'
 
-const getExercisesByGroup = () => {
+// const ID_GENERATOR = () => Math.random().toString(36).substr(2, 9)
+
+const getExercisesByGroup = exercises => {
   return Object.entries(exercises.reduce((exercises, item) => {
     const { muscles } = item
 
@@ -17,19 +19,46 @@ const getExercisesByGroup = () => {
 }
 
 export default () => {
-  const [ exercisesDB, setExercisesData ] = useState([]);
+  const [exercisesDB, setExercisesData] = useState([])
+  const [category, setCategory] = useState('')
+  const [exercise, setExercise] = useState({})
 
   useEffect(() => {
-    setExercisesData(getExercisesByGroup());
+    setExercisesData(exercises)
   }, [])
+
+  const handleCategorySelect = category => {
+    setCategory(category)
+  }
+
+  const handleExerciseSelect = id => { // ! FIX BUG
+    setExercise(exercises.find(exercise => exercise.id === id))
+  }
+
+  const onExerciseCreate = exercise => {
+    setExercisesData([...exercisesDB, exercise])
+  }
+
+  const transformedExercises = getExercisesByGroup(exercisesDB)
+
+  console.log(transformedExercises)
 
   return (
     <>
-      <Header />
-      
-      <Exercises exercisesDB={exercisesDB} />
+      <Header muscles={muscles} onExerciseCreate={onExerciseCreate}/>
 
-      <Footer muscles={muscles} />
+      <Exercises
+        exercise={exercise}
+        exercises={transformedExercises}
+        category={category}
+        onSelect={handleExerciseSelect}
+      />
+
+      <Footer
+        muscles={muscles}
+        category={category}
+        onSelect={handleCategorySelect}
+      />
     </>
   )
 }
