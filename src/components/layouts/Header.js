@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import DialogCreateWindow from '../exercises/dialogs/Create'
+import CreateDialog from '../exercises/Dialog'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,10 +31,11 @@ export default ({ muscles, onExerciseCreate }) => {
             Exercises Database
           </Typography>
 
-          <DialogCreateWindow
+          <CreateDialog
             muscles={muscles}
             onCreate={onExerciseCreate}
           />
+
         </Toolbar>
       </AppBar>
     </div>

@@ -7,10 +7,12 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton,
+  IconButton
 } from "@material-ui/core";
 
-import Delete from '@material-ui/icons/Delete';
+import { Delete, Edit } from "@material-ui/icons";
+
+import Form from "./Form";
 
 const styles = {
   Paper: {
@@ -22,15 +24,20 @@ const styles = {
 };
 
 export default ({
+  muscles,
   exercises,
   category,
   onSelect,
+  exercise,
   exercise: {
     id,
     title = "Welcome!",
     description = "Please select an example from the list"
   },
   onDelete,
+  onEdit,
+  editMode,
+  handleExerciseEdit
 }) => {
   return (
     <>
@@ -51,7 +58,18 @@ export default ({
                       <ListItem button key={id} onClick={() => onSelect(id)}>
                         <ListItemText primary={title} />
                         <ListItemSecondaryAction>
-                          <IconButton edge="end" aria-label="comments" onClick={() => onDelete(id)}>
+                          <IconButton
+                            edge="end"
+                            aria-label="comments"
+                            onClick={() => onEdit(id)}
+                          >
+                            <Edit />
+                          </IconButton>
+                          <IconButton
+                            edge="end"
+                            aria-label="comments"
+                            onClick={() => onDelete(id)}
+                          >
                             <Delete />
                           </IconButton>
                         </ListItemSecondaryAction>
@@ -65,8 +83,18 @@ export default ({
         </Grid>
         <Grid item sm>
           <Paper style={styles.Paper}>
-            <Typography variant="h5">{title}</Typography>
-            <Typography variant="subtitle1">{description}</Typography>
+            {editMode ? (
+              <Form
+                muscles={muscles}
+                onSubmit={handleExerciseEdit}
+                activeExercise={exercise}
+              />
+            ) : (
+              <>
+                <Typography variant="h5">{title}</Typography>
+                <Typography variant="subtitle1">{description}</Typography>
+              </>
+            )}
           </Paper>
         </Grid>
       </Grid>

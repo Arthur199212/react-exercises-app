@@ -5,10 +5,13 @@ import { Header, Footer } from "./layouts";
 import Exercises from "./exercises";
 
 const getExercisesByGroup = exercises => {
-  const initialExercises = muscles.reduce((exercises, category) => ({
-    ...exercises,
-    [category]: []
-  }), {});
+  const initialExercises = muscles.reduce(
+    (exercises, category) => ({
+      ...exercises,
+      [category]: []
+    }),
+    {}
+  );
 
   return Object.entries(
     exercises.reduce((exercises, item) => {
@@ -27,25 +30,35 @@ export default () => {
   const [exercisesDB, setExercisesData] = useState([]);
   const [category, setCategory] = useState("");
   const [exercise, setExercise] = useState({});
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     setExercisesData(exercises);
   }, []);
 
-  const handleCategorySelect = category => {
-    setCategory(category);
-  };
+  const handleCategorySelect = category => setCategory(category);
 
   const handleExerciseSelect = id => {
     setExercise(exercisesDB.find(exercise => exercise.id === id));
+    setEditMode(false);
   };
 
-  const onExerciseCreate = exercise => {
+  const onExerciseCreate = exercise =>
     setExercisesData([...exercisesDB, exercise]);
+
+  const handleDeleteCategory = id =>
+    setExercisesData(exercisesDB.filter(exercise => id !== exercise.id));
+
+  const handleEditCategory = id => {
+    setExercise(exercisesDB.find(exercise => exercise.id === id));
+    setEditMode(true);
   };
 
-  const handleDeleteCategory = id => {
-    setExercisesData(exercisesDB.filter(exercise => id !== exercise.id));
+  const handleExerciseEdit = exercise => {
+    setExercisesData([
+      ...exercisesDB.filter(ex => ex.id !== exercise.id),
+      exercise
+    ])
   };
 
   const transformedExercises = getExercisesByGroup(exercisesDB);
@@ -55,11 +68,16 @@ export default () => {
       <Header muscles={muscles} onExerciseCreate={onExerciseCreate} />
 
       <Exercises
+        muscles={muscles}
         exercise={exercise}
         exercises={transformedExercises}
         category={category}
         onSelect={handleExerciseSelect}
         onDelete={handleDeleteCategory}
+        onEdit={handleEditCategory}
+        handleExerciseEdit={handleExerciseEdit}
+        editMode={editMode}
+        onExerciseCreate={onExerciseCreate}
       />
 
       <Footer
