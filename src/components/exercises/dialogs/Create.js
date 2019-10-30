@@ -4,10 +4,7 @@ import {
   DialogContent, DialogContentText, DialogTitle, MenuItem,
   FormControl, InputLabel
 } from '@material-ui/core';
-// import { AddIcon } from '@material-ui/icons';
 import Icon from '@material-ui/core/Icon';
-
-const ID_GENERATOR = () => Math.random().toString(36).substr(2, 9)
 
 const styles = {
   FormControl: {
@@ -21,7 +18,7 @@ const styles = {
 
 export default ({ muscles, onCreate }) => {
   const [open, setOpen] = React.useState(false);
-  const [exercise, setExercise] = React.useState({ id: ID_GENERATOR(), title: '', description: '', muscles: '' });
+  const [exercise, setExercise] = React.useState({ id: '', title: '', description: '', muscles: '' });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,8 +35,16 @@ export default ({ muscles, onCreate }) => {
   const handleSubmit = () => {
     // TODO Validation
 
-    onCreate(exercise)
-    setExercise({ id: ID_GENERATOR(), title: '', description: '', muscles: '' })
+    onCreate({
+      ...exercise,
+      id: exercise.title.toLocaleLowerCase().replace(/ /g, '-')
+    })
+    setExercise({
+      id: '',
+      title: '',
+      description: '',
+      muscles: ''
+    })
   }
 
   return (
@@ -80,7 +85,7 @@ export default ({ muscles, onCreate }) => {
                 onChange={handleChange('muscles')}
               >
                 {muscles.map(muscle =>
-                  <MenuItem key={muscle + '111'} value={muscle}>{muscle}</MenuItem>
+                  <MenuItem key={muscle} value={muscle}>{muscle}</MenuItem>
                 )}
               </Select>
               <TextField

@@ -31,17 +31,15 @@ export default () => {
     setCategory(category)
   }
 
-  const handleExerciseSelect = id => { // ! FIX BUG
-    setExercise(exercises.find(exercise => exercise.id === id))
+  const handleExerciseSelect = id => {
+    setExercise(exercisesDB.find(exercise => exercise.id === id))
   }
-
+  
   const onExerciseCreate = exercise => {
     setExercisesData([...exercisesDB, exercise])
   }
-
+  
   const transformedExercises = getExercisesByGroup(exercisesDB)
-
-  console.log(transformedExercises)
 
   return (
     <>
