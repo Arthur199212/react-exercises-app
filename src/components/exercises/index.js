@@ -9,6 +9,8 @@ import {
   ListItemSecondaryAction,
   IconButton
 } from "@material-ui/core";
+import json2mq from "json2mq";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { Delete, Edit } from "@material-ui/icons";
 
@@ -18,9 +20,18 @@ const styles = {
   Paper: {
     padding: 20,
     marginTop: 5,
-    height: "72vh",
+    height: "calc(100% - 10px)",
     overflow: "auto"
-  }
+  },
+  MainContainer: {
+    height: 'calc(100% - 64px - 48px)'
+  },
+  MainContainerSmall: {
+    height: 'calc(100% - 106px)'
+  },
+  Item: {
+    height: '50%'
+  },
 };
 
 export default ({
@@ -39,10 +50,16 @@ export default ({
   editMode,
   handleExerciseEdit
 }) => {
+  const matches = useMediaQuery(
+    json2mq({
+      minWidth: 600,
+    })
+  );
+
   return (
     <>
-      <Grid container>
-        <Grid item xs={12} sm={6}>
+      <Grid container style={matches ? styles.MainContainer : styles.MainContainerSmall}>
+        <Grid item xs={12} sm={6} style={!matches ? styles.Item : null}>
           <Paper style={styles.Paper}>
             {exercises.map(([group, exercises]) =>
               !category || category === group ? (
@@ -81,7 +98,7 @@ export default ({
             )}
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} style={!matches ? styles.Item : null}>
           <Paper style={styles.Paper}>
             {editMode ? (
               <Form
