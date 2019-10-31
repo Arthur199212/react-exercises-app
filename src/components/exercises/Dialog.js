@@ -47,6 +47,7 @@ export default ({ muscles, onCreate }) => {
           <Form
             muscles={muscles}
             onSubmit={onCreate}
+            onClose={handleClose}
           />
           
         </DialogContent>

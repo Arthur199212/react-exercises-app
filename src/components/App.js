@@ -46,8 +46,11 @@ export default () => {
   const onExerciseCreate = exercise =>
     setExercisesData([...exercisesDB, exercise]);
 
-  const handleDeleteCategory = id =>
-    setExercisesData(exercisesDB.filter(exercise => id !== exercise.id));
+  const handleDeleteCategory = id => {
+    setExercisesData(exercisesDB.filter(exercise => id !== exercise.id))
+    if (exercise.id === id) setExercise({})
+    setEditMode(false);
+  }
 
   const handleEditCategory = id => {
     setExercise(exercisesDB.find(exercise => exercise.id === id));
@@ -59,6 +62,7 @@ export default () => {
       ...exercisesDB.filter(ex => ex.id !== exercise.id),
       exercise
     ])
+    setExercise(exercise)
   };
 
   const transformedExercises = getExercisesByGroup(exercisesDB);

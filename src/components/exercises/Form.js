@@ -19,14 +19,13 @@ const getInitialState = exercise => {
     return exercise
       ? exercise
       : {
-          id: "",
           title: "",
           description: "",
           muscles: ""
         };
   };
 
-export default ({ muscles, onSubmit, activeExercise }) => {
+export default ({ muscles, onSubmit, activeExercise, onClose }) => {
   const [exercise, setExercise] = React.useState(getInitialState(activeExercise));
 
   // Update selected exercise if we get new activeExercise
@@ -38,16 +37,11 @@ export default ({ muscles, onSubmit, activeExercise }) => {
     // TODO Validation
 
     onSubmit({
-      ...exercise,
-      id: exercise.title.toLocaleLowerCase().replace(/ /g, "-")
+      id: exercise.title.toLocaleLowerCase().replace(/ /g, "-"),
+      ...exercise
     });
 
-    setExercise({
-      id: "",
-      title: "",
-      description: "",
-      muscles: ""
-    });
+    setExercise(getInitialState());
   };
 
   const handleChange = name => ({ target: { value } }) => {
@@ -94,12 +88,12 @@ export default ({ muscles, onSubmit, activeExercise }) => {
         <br />
         <Button
           onClick={() => {
-            // handleClose();
-            // handleSubmit();
+            if (!activeExercise) onClose();
+            handleSubmit();
           }}
           color="primary"
         >
-          Submit
+          {activeExercise ? 'Edit' : 'Create'}
         </Button>
       </form>
     </>
