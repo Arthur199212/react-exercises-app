@@ -40,8 +40,6 @@ export default ({ muscles, onSubmit, activeExercise, onClose }) => {
       id: exercise.title.toLocaleLowerCase().replace(/ /g, "-"),
       ...exercise
     });
-
-    setExercise(getInitialState());
   };
 
   const handleChange = name => ({ target: { value } }) => {
@@ -87,6 +85,7 @@ export default ({ muscles, onSubmit, activeExercise, onClose }) => {
         </FormControl>
         <br />
         <Button
+          disabled={!exercise.title || !exercise.muscles}
           onClick={() => {
             if (!activeExercise) onClose();
             handleSubmit();

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { muscles, exercises } from "../store";
 import { Header, Footer } from "./layouts";
@@ -48,8 +49,10 @@ export default () => {
 
   const handleDeleteCategory = id => {
     setExercisesData(exercisesDB.filter(exercise => id !== exercise.id))
-    if (exercise.id === id) setExercise({})
-    setEditMode(false);
+    if (exercise.id === id) {
+      setExercise({})
+      setEditMode(false);
+    }
   }
 
   const handleEditCategory = id => {
@@ -69,6 +72,8 @@ export default () => {
 
   return (
     <>
+      <CssBaseline />
+      
       <Header muscles={muscles} onExerciseCreate={onExerciseCreate} />
 
       <Exercises
