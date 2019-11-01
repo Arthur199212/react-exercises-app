@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Dialog,
@@ -9,6 +9,7 @@ import {
 import Icon from "@material-ui/core/Icon";
 
 import Form from "./Form";
+import Context from '../context'
 
 const styles = {
   Icon: {
@@ -16,8 +17,10 @@ const styles = {
   }
 };
 
-export default ({ muscles, onCreate }) => {
+export default () => {
   const [open, setOpen] = React.useState(false);
+
+  const { muscles, onExerciseCreate } = useContext(Context);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,7 +49,7 @@ export default ({ muscles, onCreate }) => {
 
           <Form
             muscles={muscles}
-            onSubmit={onCreate}
+            onSubmit={onExerciseCreate}
             onClose={handleClose}
           />
           

@@ -35,20 +35,16 @@ const styles = {
 };
 
 export default ({
-  muscles,
   exercises,
   category,
   onSelect,
-  exercise,
   exercise: {
-    id,
     title = "Welcome!",
     description = "Please select an example from the list"
   },
   onDelete,
   onEdit,
-  editMode,
-  handleExerciseEdit
+  editMode
 }) => {
   const matches = useMediaQuery(
     json2mq({
@@ -101,11 +97,7 @@ export default ({
         <Grid item xs={12} sm={6} style={!matches ? styles.Item : null}>
           <Paper style={styles.Paper}>
             {editMode ? (
-              <Form
-                muscles={muscles}
-                onSubmit={handleExerciseEdit}
-                activeExercise={exercise}
-              />
+              <Form />
             ) : (
               <>
                 <Typography variant="h5" gutterBottom>{title}</Typography>
