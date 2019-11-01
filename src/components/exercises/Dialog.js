@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Button,
   Dialog,
@@ -9,7 +9,6 @@ import {
 import Icon from "@material-ui/core/Icon";
 
 import Form from "./Form";
-import Context from '../context'
 
 const styles = {
   Icon: {
@@ -19,8 +18,6 @@ const styles = {
 
 export default () => {
   const [open, setOpen] = React.useState(false);
-
-  const { muscles, onExerciseCreate } = useContext(Context);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,9 +45,7 @@ export default () => {
           <DialogContentText>Please fill out the form below</DialogContentText>
 
           <Form
-            muscles={muscles}
-            onSubmit={onExerciseCreate}
-            onClose={handleClose}
+            onClose={handleClose} // For closing Dialog by clicking submit button
           />
           
         </DialogContent>

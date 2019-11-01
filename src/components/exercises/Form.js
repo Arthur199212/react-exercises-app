@@ -27,8 +27,9 @@ const getInitialState = exercise => {
         };
   };
 
-export default ({ onClose }) => {
-  const { muscles, exercise: activeExercise, handleExerciseEdit: onSubmit } = useContext(Context);
+
+export default ({ activeExercise, onClose }) => {
+  const { muscles, handleExerciseEdit: onSubmit } = useContext(Context);
 
   const [exercise, setExercise] = React.useState(getInitialState(activeExercise));
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Context from './context'
-import { muscles, exercises } from "../store";
+import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
 import { Header, Footer } from "./layouts";
 import Exercises from "./exercises";
 import getExercisesByGroup from './helpers/getExercisesByGroup'
@@ -52,11 +52,16 @@ export default () => {
 
   const getContext = () => ({
     muscles,
-    exercises: exercisesDB,
+    exercises: transformedExercises,
     category,
     exercise,
     onExerciseCreate,
-    handleExerciseEdit
+    handleExerciseEdit,
+    onSelectExercise: handleExerciseSelect,
+    onSelectCategory: handleCategorySelect,
+    onDelete: handleDeleteCategory,
+    onEdit: handleEditCategory,
+    editMode
   })
 
   return (
@@ -66,22 +71,18 @@ export default () => {
       <Header />
 
       <Exercises
-        muscles={muscles}
-        exercise={exercise}
-        exercises={transformedExercises}
-        category={category}
-        onSelect={handleExerciseSelect}
-        onDelete={handleDeleteCategory}
-        onEdit={handleEditCategory}
-        editMode={editMode}
-        onExerciseCreate={onExerciseCreate}
+        // muscles={muscles}
+        // exercise={exercise}
+        // exercises={transformedExercises}
+        // category={category}
+        // onSelect={handleExerciseSelect}
+        // onDelete={handleDeleteCategory}
+        // onEdit={handleEditCategory}
+        // editMode={editMode}
+        // onExerciseCreate={onExerciseCreate}
       />
 
-      <Footer
-        muscles={muscles}
-        category={category}
-        onSelect={handleCategorySelect}
-      />
+      <Footer />
     </Context.Provider>
   );
 };
