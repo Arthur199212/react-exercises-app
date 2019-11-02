@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({ muscles, onExerciseCreate }) => {
+export default () => {
   const classes = useStyles();
 
   return (
@@ -27,10 +27,7 @@ export default ({ muscles, onExerciseCreate }) => {
             Exercises Database
           </Typography>
 
-          <CreateDialog
-            muscles={muscles}
-            onCreate={onExerciseCreate}
-          />
+          <CreateDialog />
 
         </Toolbar>
       </AppBar>

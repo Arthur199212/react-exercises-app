@@ -1,32 +1,11 @@
-import "@babel/polyfill";
 import React, { useEffect, useState } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { muscles, exercises } from "../store";
+import Context from './context'
+import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
 import { Header, Footer } from "./layouts";
 import Exercises from "./exercises";
-
-const getExercisesByGroup = exercises => {
-  const initialExercises = muscles.reduce(
-    (exercises, category) => ({
-      ...exercises,
-      [category]: []
-    }),
-    {}
-  );
-
-  return Object.entries(
-    exercises.reduce((exercises, item) => {
-      const { muscles } = item;
-
-      exercises[muscles] = exercises[muscles]
-        ? [...exercises[muscles], item]
-        : [item];
-
-      return exercises;
-    }, initialExercises)
-  );
-};
+import getExercisesByGroup from './helpers/getExercisesByGroup'
 
 export default () => {
   const [exercisesDB, setExercisesData] = useState([]);
@@ -69,32 +48,31 @@ export default () => {
     setExercise(exercise)
   };
 
-  const transformedExercises = getExercisesByGroup(exercisesDB);
+  const transformedExercises = getExercisesByGroup(exercisesDB, muscles);
+
+  const getContext = () => ({
+    muscles,
+    exercises: transformedExercises,
+    category,
+    exercise,
+    onExerciseCreate,
+    handleExerciseEdit,
+    onSelectExercise: handleExerciseSelect,
+    onSelectCategory: handleCategorySelect,
+    onDelete: handleDeleteCategory,
+    onEdit: handleEditCategory,
+    editMode
+  })
 
   return (
-    <>
+    <Context.Provider value={getContext()}>
       <CssBaseline />
       
-      <Header muscles={muscles} onExerciseCreate={onExerciseCreate} />
+      <Header />
 
-      <Exercises
-        muscles={muscles}
-        exercise={exercise}
-        exercises={transformedExercises}
-        category={category}
-        onSelect={handleExerciseSelect}
-        onDelete={handleDeleteCategory}
-        onEdit={handleEditCategory}
-        handleExerciseEdit={handleExerciseEdit}
-        editMode={editMode}
-        onExerciseCreate={onExerciseCreate}
-      />
+      <Exercises />
 
-      <Footer
-        muscles={muscles}
-        category={category}
-        onSelect={handleCategorySelect}
-      />
-    </>
+      <Footer />
+    </Context.Provider>
   );
 };

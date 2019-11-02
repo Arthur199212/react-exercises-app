@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Paper, Tabs, Tab } from "@material-ui/core";
 import json2mq from "json2mq";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-export default ({ muscles, category, onSelect }) => {
+import Context from '../context'
+
+export default () => {
+  const { muscles, category, onSelectCategory } = useContext(Context)
+
   const index = category
     ? muscles.findIndex(group => group === category) + 1
     : 0;
 
   const onIndexSelect = (e, index) =>
-    onSelect(index === 0 ? "" : muscles[index - 1]);
+    onSelectCategory(index === 0 ? "" : muscles[index - 1]);
 
   const matches = useMediaQuery(
     json2mq({

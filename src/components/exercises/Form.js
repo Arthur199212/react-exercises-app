@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   TextField,
   Select,
@@ -7,6 +7,8 @@ import {
   InputLabel,
   Button
 } from "@material-ui/core";
+
+import Context from '../context'
 
 const styles = {
   FormControl: {
@@ -25,7 +27,10 @@ const getInitialState = exercise => {
         };
   };
 
-export default ({ muscles, onSubmit, activeExercise, onClose }) => {
+
+export default ({ activeExercise, onClose }) => {
+  const { muscles, handleExerciseEdit: onSubmit } = useContext(Context);
+
   const [exercise, setExercise] = React.useState(getInitialState(activeExercise));
 
   // Update selected exercise if we get new activeExercise

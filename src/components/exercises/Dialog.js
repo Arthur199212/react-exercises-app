@@ -16,7 +16,7 @@ const styles = {
   }
 };
 
-export default ({ muscles, onCreate }) => {
+export default () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -45,9 +45,7 @@ export default ({ muscles, onCreate }) => {
           <DialogContentText>Please fill out the form below</DialogContentText>
 
           <Form
-            muscles={muscles}
-            onSubmit={onCreate}
-            onClose={handleClose}
+            onClose={handleClose} // For closing Dialog by clicking submit button
           />
           
         </DialogContent>
