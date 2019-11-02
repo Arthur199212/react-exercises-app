@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import React, { useEffect, useState } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
