@@ -31,6 +31,9 @@ const styles = {
     height: "calc(100% - 106px)",
   },
   Item: {
+    height: "100%",
+  },
+  ItemSmall: {
     height: "50%",
   },
 };
@@ -62,7 +65,7 @@ export default () => {
         container
         style={matches ? styles.MainContainer : styles.MainContainerSmall}
       >
-        <Grid item xs={12} sm={6} style={!matches ? styles.Item : null}>
+        <Grid item xs={12} sm={6} style={!matches ? styles.ItemSmall : styles.Item}>
           <Paper style={styles.Paper}>
             {exercises.map(([group, exercises]) =>
               !category || category === group ? (
@@ -101,7 +104,7 @@ export default () => {
             )}
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6} style={!matches ? styles.Item : null}>
+        <Grid item xs={12} sm={6} style={!matches ? styles.ItemSmall : styles.Item}>
           <Paper style={styles.Paper}>
             {editMode ? (
               <Form
