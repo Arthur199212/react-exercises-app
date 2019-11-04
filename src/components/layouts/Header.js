@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
-import CreateDialog from '../exercises/Dialog'
+import CreateDialog from '../exercises/CreateDialog'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default () => {
+const Header = () => {
   const classes = useStyles();
 
   return (
@@ -34,3 +34,5 @@ export default () => {
     </div>
   );
 }
+
+export default Header

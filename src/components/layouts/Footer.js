@@ -5,7 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Context from '../context'
 
-export default () => {
+const Footer = () => {
   const { muscles, category, onSelectCategory } = useContext(Context)
 
   const index = category
@@ -41,3 +41,5 @@ export default () => {
     </Paper>
   );
 };
+
+export default Footer

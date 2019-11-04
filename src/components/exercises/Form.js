@@ -27,8 +27,7 @@ const getInitialState = exercise => {
         };
   };
 
-
-export default ({ activeExercise, onClose }) => {
+const Form = ({ activeExercise, onClose }) => {
   const { muscles, handleExerciseEdit: onSubmit } = useContext(Context);
 
   const [exercise, setExercise] = React.useState(getInitialState(activeExercise));
@@ -103,3 +102,5 @@ export default ({ activeExercise, onClose }) => {
     </>
   );
 };
+
+export default Form

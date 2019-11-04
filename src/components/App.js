@@ -7,7 +7,7 @@ import { Header, Footer } from "./layouts";
 import Exercises from "./exercises";
 import getExercisesByGroup from './helpers/getExercisesByGroup'
 
-export default () => {
+const App = () => {
   const [exercisesDB, setExercisesData] = useState([]);
   const [category, setCategory] = useState("");
   const [exercise, setExercise] = useState({});
@@ -76,3 +76,5 @@ export default () => {
     </Context.Provider>
   );
 };
+
+export default App
