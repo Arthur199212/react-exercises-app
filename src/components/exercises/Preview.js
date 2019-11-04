@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Typography } from '@material-ui/core';
 
 import Context from "../context";
-import Form from './Form'
+import { Form } from './'
 
 const Preview = () => {
   const {

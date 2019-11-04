@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Dialog, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
-import Form from "./Form";
+import { Form } from "./";
 
 const styles = {
   Icon: {

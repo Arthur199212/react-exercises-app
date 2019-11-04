@@ -23,7 +23,7 @@ const Listing = () => {
   return (
     <>
       {exercises.map(([group, exercises]) =>
-        !category || category === group ? (
+        (!category || category === group) && (
           <Fragment key={group}>
             <Typography variant="h6" style={{ textTransform: "capitalize" }}>
               {group}
@@ -52,7 +52,7 @@ const Listing = () => {
               ))}
             </List>
           </Fragment>
-        ) : null
+        )
       )}
     </>
   );

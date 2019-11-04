@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Context from './context'
 import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
 import { Header, Footer } from "./layouts";
-import Exercises from "./exercises";
+import { Viewer } from "./exercises";
 import getExercisesByGroup from './helpers/getExercisesByGroup'
 
 const App = () => {
@@ -70,7 +70,7 @@ const App = () => {
       
       <Header />
 
-      <Exercises />
+      <Viewer />
 
       <Footer />
     </Context.Provider>
