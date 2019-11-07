@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 import Context from './context'
+
+import { useSelector, useDispatch } from "react-redux";
+import { modOn, modOff } from '../redux/actions'
+
 import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Header, Footer } from "./layouts";
 import { Viewer } from "./exercises";
 import getExercisesByGroup from './helpers/getExercisesByGroup'
@@ -11,7 +14,10 @@ const App = () => {
   const [exercisesDB, setExercisesData] = useState([]);
   const [category, setCategory] = useState("");
   const [exercise, setExercise] = useState({});
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
+
+  const editMode = useSelector(({ editMode: { status } }) => status);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setExercisesData(exercises);
@@ -21,7 +27,8 @@ const App = () => {
 
   const handleExerciseSelect = id => {
     setExercise(exercisesDB.find(exercise => exercise.id === id));
-    setEditMode(false);
+    // setEditMode(false);
+    dispatch(modOff())
   };
 
   const onExerciseCreate = exercise =>
@@ -31,13 +38,15 @@ const App = () => {
     setExercisesData(exercisesDB.filter(exercise => id !== exercise.id))
     if (exercise.id === id) {
       setExercise({})
-      setEditMode(false);
+      // setEditMode(false);
+      dispatch(modOff())
     }
   }
 
   const handleEditCategory = id => {
     setExercise(exercisesDB.find(exercise => exercise.id === id));
-    setEditMode(true);
+    // setEditMode(true);
+    dispatch(modOn())
   };
 
   const handleExerciseEdit = exercise => {
