@@ -1,12 +1,12 @@
 import { MOD_ON, MOD_OFF } from "../actions/actionTypes";
 
-export default function(state = { status: false }, { type }) {
+export default function(state = false, { type }) {
   switch (type) {
     case MOD_ON: {
-      return { status: true }
+      return true
     }
     case MOD_OFF: {
-      return { status: false }
+      return false
     }
     default:
       return state;

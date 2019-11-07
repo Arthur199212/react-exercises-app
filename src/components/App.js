@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Context from './context'
 
 import { useSelector, useDispatch } from "react-redux";
-import { modOn, modOff } from '../redux/actions'
+import { modOn, modOff } from '../redux/actions' // in this case it's better to get objects, not functions
 
 import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,7 +16,7 @@ const App = () => {
   const [exercise, setExercise] = useState({});
   // const [editMode, setEditMode] = useState(false);
 
-  const editMode = useSelector(({ editMode: { status } }) => status);
+  const editMode = useSelector(({ editMode }) => editMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
