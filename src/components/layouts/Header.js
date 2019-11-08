@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 import CreateDialog from '../exercises/CreateDialog'
 
@@ -14,10 +14,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
-}));
+}))
 
 const Header = () => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -32,7 +32,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
     </div>
-  );
+  )
 }
 
 export default Header

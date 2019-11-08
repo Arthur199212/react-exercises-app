@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { Paper, Tabs, Tab } from "@material-ui/core";
-import json2mq from "json2mq";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import React, { useContext } from 'react'
+import { Paper, Tabs, Tab } from '@material-ui/core'
+import json2mq from 'json2mq'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import Context from '../context'
 
@@ -10,16 +10,16 @@ const Footer = () => {
 
   const index = category
     ? muscles.findIndex(group => group === category) + 1
-    : 0;
+    : 0
 
   const onIndexSelect = (e, index) =>
-    onSelectCategory(index === 0 ? "" : muscles[index - 1]);
+    onSelectCategory(index === 0 ? "" : muscles[index - 1])
 
   const matches = useMediaQuery(
     json2mq({
       minWidth: 600,
     })
-  );
+  )
 
   return (
     <Paper square>
@@ -39,7 +39,7 @@ const Footer = () => {
         ))}
       </Tabs>
     </Paper>
-  );
-};
+  )
+}
 
 export default Footer

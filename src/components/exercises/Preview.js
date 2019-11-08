@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { Typography } from '@material-ui/core';
+import React, { useContext } from 'react'
+import { Typography } from '@material-ui/core'
 
-import Context from "../context";
+import Context from '../context'
 import { Form } from './'
 
 const Preview = () => {
@@ -9,7 +9,7 @@ const Preview = () => {
     exercise,
     exercise: { title, description },
     editMode,
-  } = useContext(Context);
+  } = useContext(Context)
 
   return (
     <>
@@ -28,7 +28,7 @@ const Preview = () => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
 export default Preview

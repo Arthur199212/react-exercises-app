@@ -5,7 +5,7 @@ export default (exercises, muscles) => {
       [category]: [],
     }),
     {}
-  );
+  )
 
   return Object.entries(
     exercises.reduce((exercises, item) => {
@@ -17,5 +17,5 @@ export default (exercises, muscles) => {
 
       return exercises;
     }, initialExercises)
-  );
-};
+  )
+}

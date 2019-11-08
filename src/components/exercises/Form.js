@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext } from 'react'
 import {
   TextField,
   Select,
@@ -6,31 +6,31 @@ import {
   FormControl,
   InputLabel,
   Button
-} from "@material-ui/core";
+} from '@material-ui/core'
 
 import Context from '../context'
 
 const styles = {
   FormControl: {
-    width: "100%",
-    margin: "20px 0px"
+    width: '100%',
+    margin: '20px 0px'
   }
-};
+}
 
 const getInitialState = exercise => {
     return exercise
       ? exercise
       : {
-          title: "",
-          description: "",
-          muscles: ""
-        };
-  };
+          title: '',
+          description: '',
+          muscles: ''
+        }
+  }
 
 const Form = ({ activeExercise, onClose }) => {
-  const { muscles, handleExerciseEdit: onSubmit } = useContext(Context);
+  const { muscles, handleExerciseEdit: onSubmit } = useContext(Context)
 
-  const [exercise, setExercise] = React.useState(getInitialState(activeExercise));
+  const [exercise, setExercise] = React.useState(getInitialState(activeExercise))
 
   // Update selected exercise if we get new activeExercise
   useEffect(() => {
@@ -38,17 +38,15 @@ const Form = ({ activeExercise, onClose }) => {
   }, [activeExercise])
 
   const handleSubmit = () => {
-    // TODO Validation
-
     onSubmit({
       id: exercise.title.toLocaleLowerCase().replace(/ /g, "-"),
       ...exercise
-    });
-  };
+    })
+  }
 
   const handleChange = name => ({ target: { value } }) => {
-    setExercise({ ...exercise, [name]: value });
-  };
+    setExercise({ ...exercise, [name]: value })
+  }
 
   return (
     <>
@@ -91,8 +89,8 @@ const Form = ({ activeExercise, onClose }) => {
         <Button
           disabled={!exercise.title || !exercise.muscles}
           onClick={() => {
-            if (!activeExercise) onClose();
-            handleSubmit();
+            if (!activeExercise) onClose()
+            handleSubmit()
           }}
           color="primary"
         >
@@ -100,7 +98,7 @@ const Form = ({ activeExercise, onClose }) => {
         </Button>
       </form>
     </>
-  );
-};
+  )
+}
 
 export default Form

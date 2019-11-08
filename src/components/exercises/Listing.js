@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext } from 'react'
 import {
   Typography,
   List,
@@ -6,10 +6,10 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-} from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons";
+} from '@material-ui/core'
+import { Delete, Edit } from '@material-ui/icons'
 
-import Context from "../context";
+import Context from '../context'
 
 const Listing = () => {
   const {
@@ -18,7 +18,7 @@ const Listing = () => {
     onSelectExercise: onSelect,
     onDelete,
     onEdit,
-  } = useContext(Context);
+  } = useContext(Context)
 
   return (
     <>
@@ -55,7 +55,7 @@ const Listing = () => {
         )
       )}
     </>
-  );
-};
+  )
+}
 
-export default Listing;
+export default Listing

@@ -1,63 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react"
 import Context from './context'
+import { useSelector, useDispatch } from "react-redux"
+import {
+  modOn,
+  modOff,
+  setExercise,
+  cleanExercise,
+  selectExercise,
+  setCategory,
+  setMuscles,
+  setExercises,
+  addExercise,
+  deleteExercise,
+  editExercise
+} from '../redux/actions'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-import { useSelector, useDispatch } from "react-redux";
-import { modOn, modOff } from '../redux/actions' // in this case it's better to get objects, not functions
-
-import { muscles, exercises } from "../store"; // TODO put fetch into useEffect()
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { Header, Footer } from "./layouts";
-import { Viewer } from "./exercises";
+import { musclesDB, exercisesDB } from "../store"
+import { Header, Footer } from "./layouts"
+import { Viewer } from "./exercises"
 import getExercisesByGroup from './helpers/getExercisesByGroup'
 
 const App = () => {
-  const [exercisesDB, setExercisesData] = useState([]);
-  const [category, setCategory] = useState("");
-  const [exercise, setExercise] = useState({});
-  // const [editMode, setEditMode] = useState(false);
+  const exercises = useSelector(({ exercises }) => exercises)
+  const muscles = useSelector(({ muscles }) => muscles)
+  const category = useSelector(({ category }) => category)
+  const exercise = useSelector(({ exercise }) => exercise)
+  const editMode = useSelector(({ editMode }) => editMode)
 
-  const editMode = useSelector(({ editMode }) => editMode);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setExercisesData(exercises);
-  }, []);
+    dispatch(setExercises(exercisesDB))
+    dispatch(setMuscles(musclesDB))
+  }, [])
 
-  const handleCategorySelect = category => setCategory(category);
+  const handleCategorySelect = category => dispatch(setCategory(category))
 
   const handleExerciseSelect = id => {
-    setExercise(exercisesDB.find(exercise => exercise.id === id));
-    // setEditMode(false);
+    dispatch(selectExercise({ exercises, id }))
     dispatch(modOff())
-  };
+  }
 
   const onExerciseCreate = exercise =>
-    setExercisesData([...exercisesDB, exercise]);
+    dispatch(addExercise(exercise))
 
   const handleDeleteCategory = id => {
-    setExercisesData(exercisesDB.filter(exercise => id !== exercise.id))
+    dispatch(deleteExercise(id))
+
     if (exercise.id === id) {
-      setExercise({})
-      // setEditMode(false);
+      dispatch(cleanExercise())
       dispatch(modOff())
     }
   }
 
   const handleEditCategory = id => {
-    setExercise(exercisesDB.find(exercise => exercise.id === id));
-    // setEditMode(true);
+    dispatch(selectExercise({ exercises, id }))
     dispatch(modOn())
-  };
+  }
 
   const handleExerciseEdit = exercise => {
-    setExercisesData([
-      ...exercisesDB.filter(ex => ex.id !== exercise.id),
-      exercise
-    ])
-    setExercise(exercise)
-  };
+    dispatch(editExercise(exercise))
+    dispatch(setExercise(exercise))
+  }
 
-  const transformedExercises = getExercisesByGroup(exercisesDB, muscles);
+  const transformedExercises = getExercisesByGroup(exercises, muscles)
 
   const getContext = () => ({
     muscles,
@@ -76,14 +83,14 @@ const App = () => {
   return (
     <Context.Provider value={getContext()}>
       <CssBaseline />
-      
+
       <Header />
 
       <Viewer />
 
       <Footer />
     </Context.Provider>
-  );
-};
+  )
+}
 
 export default App

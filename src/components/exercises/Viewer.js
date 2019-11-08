@@ -1,37 +1,37 @@
-import React from "react";
-import { Grid, Paper } from "@material-ui/core";
-import json2mq from "json2mq";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import React from 'react'
+import { Grid, Paper } from '@material-ui/core'
+import json2mq from 'json2mq'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
-import { Listing, Preview } from "./";
+import { Listing, Preview } from './'
 
 const styles = {
   Paper: {
     padding: 20,
     marginTop: 5,
-    height: "calc(100% - 10px)",
-    overflow: "auto",
+    height: 'calc(100% - 10px)',
+    overflow: 'auto',
   },
   MainContainer: {
-    height: "calc(100% - 64px - 48px)",
+    height: 'calc(100% - 64px - 48px)',
   },
   MainContainerSmall: {
-    height: "calc(100% - 106px)",
+    height: 'calc(100% - 106px)',
   },
   Item: {
-    height: "100%",
+    height: '100%',
   },
   ItemSmall: {
-    height: "50%",
+    height: '50%',
   },
-};
+}
 
 const Viewer = () => {
   const matches = useMediaQuery(
     json2mq({
       minWidth: 600,
     })
-  );
+  )
 
   return (
     <>
@@ -65,7 +65,7 @@ const Viewer = () => {
         </Grid>
       </Grid>
     </>
-  );
-};
+  )
+}
 
 export default Viewer

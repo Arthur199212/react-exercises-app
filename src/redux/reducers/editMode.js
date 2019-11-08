@@ -1,6 +1,6 @@
-import { MOD_ON, MOD_OFF } from "../actions/actionTypes";
+import { MOD_ON, MOD_OFF } from '../actions/actionTypes'
 
-export default function(state = false, { type }) {
+export default (state = false, { type }) => {
   switch (type) {
     case MOD_ON: {
       return true
@@ -9,6 +9,6 @@ export default function(state = false, { type }) {
       return false
     }
     default:
-      return state;
+      return state
   }
 }

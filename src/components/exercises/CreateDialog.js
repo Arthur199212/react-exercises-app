@@ -1,25 +1,25 @@
-import React from "react";
-import { Button, Dialog, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
-import Icon from "@material-ui/core/Icon";
+import React from 'react'
+import { Button, Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import Icon from '@material-ui/core/Icon'
 
-import { Form } from "./";
+import { Form } from './'
 
 const styles = {
   Icon: {
-    color: "#FFF"
+    color: '#FFF'
   }
-};
+}
 
 const CreateDialog = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div>
@@ -45,7 +45,7 @@ const CreateDialog = () => {
         </DialogContent>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
 export default CreateDialog
