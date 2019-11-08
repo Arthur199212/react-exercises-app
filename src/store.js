@@ -1,8 +1,8 @@
-export const muscles = [
+export const musclesDB = [
   'shoulders', 'chest', 'arms', 'back', 'legs'
 ]
 
-export const exercises = [
+export const exercisesDB = [
   {
     id: 'overhead-press',
     title: 'Overhead Press',

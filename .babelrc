@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "useBuiltIns": "usage",
+        "targets": {
+          "browsers": ">1%, not dead, not ie 11, not op_mini all"
+        }
+      }
+    ], "@babel/react"
+  ],
+  "plugins": [
+    "@babel/syntax-dynamic-import"
+  ]
+}
