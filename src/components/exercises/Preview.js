@@ -23,7 +23,7 @@ const Preview = () => {
             {title || 'Welcome!'}
           </Typography>
           <Typography variant='subtitle1'>
-            {description || 'Please select an example from the list'}
+            {description || 'Please select an exercise from the list'}
           </Typography>
         </>
       )}
